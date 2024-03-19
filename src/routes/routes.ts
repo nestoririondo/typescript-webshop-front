@@ -11,7 +11,7 @@ import Signup from "../pages/Signup";
 export const routes = [
   { path: "/", element: Home, index: true },
   { path: "/products", element: Products },
-  { path: "/product/:id", element: Product },
+  { path: "/products/:id", element: Product },
   { path: "/user", element: User },
   { path: "/order", element: Order },
   { path: "/cart", element: Cart },
