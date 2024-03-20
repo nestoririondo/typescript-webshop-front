@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getProduct } from "../api/products";
-import { Product } from "../types/product";
+import { ProductType } from "../types/product";
 
 const Product = () => {
-  const [product, setProduct] = useState<Product>();
+  const [product, setProduct] = useState<ProductType>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>();
   const { id } = useParams();
@@ -12,7 +12,7 @@ const Product = () => {
   useEffect(() => {
     if (!id) return;
     getProduct(id)
-      .then((data) => setProduct(data))
+      .then((res) => setProduct(res.data))
       .catch((err) => setError(err))
       .finally(() => setIsLoading(false));
   }, []);
