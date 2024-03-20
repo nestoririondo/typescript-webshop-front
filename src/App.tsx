@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { routes } from "./routes/routes";
 import "./styles/app.css";
 
-interface RouteObject {
+type RouteObject = {
   path: string;
   element: React.ElementType;
   index?: boolean;
