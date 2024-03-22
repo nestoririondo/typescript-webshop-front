@@ -1,8 +1,7 @@
 import axios from "axios";
 import { SERVER } from "../constants/server";
-import { User } from "../pages/Signup";
+import { SignUpData } from "../pages/Signup";
 
-export const createUser = async (data: User) => {
-  const response = await axios.post(`${SERVER}/auth/register`, data);
-  return response.data;
+export const createUser = async (data: SignUpData) => {
+  return await axios.post(`${SERVER}/auth/register`, data).then((response)=> response.data);
 };

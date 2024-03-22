@@ -1,16 +1,35 @@
 import axios from "axios";
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, ReactNode } from "react";
 import { SERVER } from "../constants/server";
-import { UserInput } from "../pages/Login";
+import { LoginData } from "../pages/Login";
 
-const AuthContext = createContext();
+type AuthContextType = {
+  user: User | undefined;
+  login: (userInput: LoginData) => Promise<void>;
+};
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState();
+type User = {
+  id: string;
+  name: string;
+  email: string;
+  profilePic?: string;
+  createdAt: string;
+};
 
-  const login = async (userInput: UserInput) => {
-    const response = await axios.post(`${SERVER}/auth/login`, userInput);
-    setUser(response.data.data);
+type AuthProviderProps = {
+  children: ReactNode;
+};
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const AuthProvider = ({ children }: AuthProviderProps) => {
+  const [user, setUser] = useState<User>();
+
+  const login = async (userInput: LoginData) => {
+    const user = await axios
+      .post<User>(`${SERVER}/auth/login`, userInput)
+      .then((response) => response.data);
+    setUser(user);
   };
 
   const value = { user, login };

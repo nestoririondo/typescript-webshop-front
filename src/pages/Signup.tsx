@@ -1,36 +1,44 @@
 import { useState } from "react";
 import { createUser } from "../api/users";
+import { useNavigate } from "react-router-dom";
 
-export type User = {
+export type SignUpData = {
   name: string;
   email: string;
   password: string;
 };
 
 const Signup = () => {
-  const [formData, setFormData] = useState<User>({
+  const [formData, setFormData] = useState<SignUpData>({
     name: "",
     email: "",
     password: "",
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
-  const handleChange = (e: any) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+
+    if (isLoading) return;
+
     createUser(formData)
-      .then((data) => console.log(data))
+      .then(() => {
+        setTimeout(() => navigate("/"), 3000);
+      })
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
   };
 
   return (
     <>
-      <h1>Signup</h1>
+      <h1>Sign Up</h1>
       <div className="form-container">
         <form onSubmit={handleSubmit}>
           <input
