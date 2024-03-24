@@ -6,11 +6,11 @@ type RouteObject = {
   path: string;
   element: React.ElementType;
   index?: boolean;
-}
+};
 
 function App() {
   return (
-    <>    
+    <>
       <Routes>
         {routes.map((route: RouteObject, index: number) => (
           <Route

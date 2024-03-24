@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createUser } from "../api/users";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../components/NavBar";
 
 export type SignUpData = {
   name: string;
@@ -38,7 +39,7 @@ const Signup = () => {
 
   return (
     <>
-      <h1>Sign Up</h1>
+      <NavBar />
       <div className="form-container">
         <form onSubmit={handleSubmit}>
           <input
