@@ -2,6 +2,7 @@ import axios from "axios";
 import { createContext, useState, useContext, ReactNode } from "react";
 import { SERVER } from "../constants/server";
 import { LoginData } from "../pages/Login";
+import { v4 as uuidv4 } from 'uuid';
 
 type AuthContextType = {
   user: User | undefined;
@@ -9,7 +10,7 @@ type AuthContextType = {
 };
 
 type User = {
-  id: string;
+  id: typeof uuidv4;
   name: string;
   email: string;
   profilePic?: string;

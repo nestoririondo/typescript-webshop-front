@@ -14,7 +14,7 @@ const Login = () => {
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { user, login } = useAuth;
+  const { user , login } = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
