@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/useAuth";
-import NavBar from "../components/NavBar";
 
 export type LoginData = {
   email: string;
@@ -34,7 +33,6 @@ const Login = () => {
 
   return (
     <>
-      <NavBar />
       <div className="login-container">
         <form onSubmit={handleSubmit}>
           <input

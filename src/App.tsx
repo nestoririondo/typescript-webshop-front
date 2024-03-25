@@ -1,16 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-import { routes } from "./routes/routes";
+import { routes, RouteObject } from "./routes/routes";
+import NavBar from "./components/NavBar";
 import "./styles/app.css";
-
-type RouteObject = {
-  path: string;
-  element: React.ElementType;
-  index?: boolean;
-};
 
 function App() {
   return (
     <>
+      <NavBar />
       <Routes>
         {routes.map((route: RouteObject, index: number) => (
           <Route

@@ -1,18 +1,3 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
 import { Fragment, useState } from "react";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
@@ -24,6 +9,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
+import { useBasket } from "../context/useBasket";
 
 const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"];
 const navigation = {
@@ -114,6 +100,7 @@ function classNames(...classes) {
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
+  const { basket } = useBasket();
 
   return (
     <div className="bg-white">
@@ -504,14 +491,24 @@ export default function NavBar() {
                         <a
                           href="#"
                           className="group -m-2 flex items-center p-2"
+                          style={{ position: "relative" }}
                         >
                           <ShoppingBagIcon
                             className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                             aria-hidden="true"
                           />
-                          <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                            0
-                          </span>
+                          <div
+                            className="flex justify-center items-center bg-red-500 text-white rounded-full px-2 py-0.5 text-xs font-semibold"
+                            style={{
+                              position: "absolute",
+                              width: "1rem",
+                              height: "1rem",
+                              bottom: 0,
+                              right: 0,
+                            }}
+                          >
+                            {basket.length}
+                          </div>
                           <span className="sr-only">
                             items in cart, view bag
                           </span>
