@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getProduct } from "../api/products";
 import { ProductType } from "../types/product";
+import ProductDetails from "../components/ProductDetails";
 
 const Product = () => {
   const [product, setProduct] = useState<ProductType>();
@@ -19,16 +20,13 @@ const Product = () => {
 
   return (
     <>
-      <h1>Product</h1>
-      {!isLoading && product && (
-        <div className="product-container">
-          <h3>{product.name}</h3>
-          <p>{product.description}</p>
-          <p>{product.price} €</p>
-          <p>Stock: {product.stock}</p>
-        </div>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <div>{error}</div>
+      ) : (
+        <ProductDetails product={product} />
       )}
-      {isLoading && <div>Loading...</div>}
     </>
   );
 };
