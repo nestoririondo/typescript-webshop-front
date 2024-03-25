@@ -8,6 +8,12 @@ import Checkout from "../pages/Checkout";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 
+export type RouteObject = {
+  path: string;
+  element: React.ElementType;
+  index?: boolean;
+};
+
 export const routes = [
   { path: "/", element: Home, index: true },
   { path: "/products", element: Products },
