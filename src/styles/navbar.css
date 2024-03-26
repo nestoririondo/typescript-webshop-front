@@ -68,13 +68,13 @@ header {
     }
     .nav-links {
       height: 0;
-        overflow: hidden;
+      overflow: hidden;
       position: absolute;
       top: 4rem;
       left: 0;
       width: 100%;
       background-color: #333;
-      transition: height 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
       ul {
         flex-direction: column;
         .nav-link {
@@ -86,7 +86,7 @@ header {
       }
     }
     .active {
-      height: auto;
+      height: 10rem;
     }
   }
 }
