@@ -3,9 +3,16 @@ import { useState } from "react";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { IoPersonOutline } from "react-icons/io5";
 import "../styles/navbar.css";
+import { useBasket, BasketProduct } from "../context/useBasket";
 
 const NavBar = () => {
   const [open, setOpen] = useState(false);
+
+  const { basket } = useBasket();
+
+  const totalItems = basket.reduce((acc: number, item: BasketProduct) => {
+    return acc + item.quantity;
+  }, 0);
 
   return (
     <header>
@@ -31,7 +38,7 @@ const NavBar = () => {
         <div className="user-cart">
           <IoPersonOutline className="user-icon" />
           <IoBagHandleOutline className="bag-icon" />
-          <span className="cart-count">0</span>
+          <span className="cart-count">{totalItems}</span>
         </div>
       </nav>
     </header>
