@@ -49,6 +49,7 @@ header {
       font-size: 1.5rem;
     }
     .cart-count {
+      cursor: pointer;
       position: absolute;
       bottom: -0.5rem;
       right: -0.5rem;
