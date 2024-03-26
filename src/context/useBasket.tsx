@@ -1,14 +1,15 @@
 import { createContext, useState, useContext, ReactNode } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-type BasketProduct = {
-  id: string;
+export type BasketProduct = {
+  id: typeof uuidv4;
   quantity: number;
 };
 
 type BasketContextType = {
   basket: BasketProduct[];
-  addToBasket: (productId: string) => void;
-  removeFromBasket: (productId: string) => void;
+  addToBasket: (productId: typeof uuidv4) => void;
+  removeFromBasket: (productId: typeof uuidv4) => void;
 };
 
 type BasketProviderProps = {
@@ -19,7 +20,7 @@ const BasketContext = createContext<BasketContextType | undefined>(undefined);
 export const BasketProvider = ({ children }: BasketProviderProps) => {    
   const [basket, setBasket] = useState<BasketProduct[]>([]);
 
-  const addToBasket = (productId: string) => {
+  const addToBasket = (productId: BasketProduct["id"]) => {
     const product = basket.find((product) => product.id === productId);
     if (product) {
       product.quantity += 1;
@@ -28,10 +29,9 @@ export const BasketProvider = ({ children }: BasketProviderProps) => {
       const newProduct = { id: productId, quantity: 1 };
       setBasket([...basket, newProduct]);
     }
-    console.log(basket)
   };
 
-  const removeFromBasket = (productId: string) => {
+  const removeFromBasket = (productId: BasketProduct["id"]) => {
     const product = basket.find((product) => product.id === productId);
     if (product) {
       product.quantity -= 1;
