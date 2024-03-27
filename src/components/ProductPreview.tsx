@@ -7,7 +7,7 @@ type ItemProps = {
   product: ProductType;
 };
 
-const Item = ({ product }: ItemProps) => {
+const ProductPreview = ({ product }: ItemProps) => {
   const { addToBasket } = useBasket();
   const { name, description, price, id } = product;
 
@@ -31,4 +31,4 @@ const Item = ({ product }: ItemProps) => {
   );
 };
 
-export default Item;
+export default ProductPreview;
