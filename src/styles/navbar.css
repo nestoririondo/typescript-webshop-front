@@ -43,6 +43,9 @@ header {
     display: flex;
     gap: 1rem;
     position: relative;
+    span {
+      color: white;
+    }
     .user-icon,
     .bag-icon {
       cursor: pointer;
