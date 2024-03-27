@@ -1,38 +1,33 @@
-import { ProductType } from "../types/product";
-import { Link } from "react-router-dom";
 import { formatCurrency } from "../utils/formatCurrency";
+import { ProductType } from "../types/product";
+import { useBasket } from "../context/useBasket";
+import { useNavigate } from "react-router-dom";
 
 type ItemProps = {
   product: ProductType;
 };
 
 const Item = ({ product }: ItemProps) => {
+  const { addToBasket } = useBasket();
+  const { name, description, price, id } = product;
 
-  const { id, name, description, price, stock } = product;
+  const navigate = useNavigate();
+
   return (
-    <Link to={`/products/${id}`} key={name} className="group relative">
-      <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-        {/* <img
-          src={product.imageSrc}
-          alt={product.imageAlt}
-          className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-        /> */}
+    <>
+      <div
+        key={product.id.toString()}
+        onClick={() => navigate(`/products/${product.id}`)}
+        className="product-card"
+      >
+        <h2>{name}</h2>
+        <p>{description}</p>
+        <p>{formatCurrency(price)}</p>
       </div>
-      <div className="mt-4 flex justify-between">
-        <div>
-          <h3 className="text-sm text-gray-700">
-            <a href="">
-              <span aria-hidden="true" className="absolute inset-0" />
-              {name}
-            </a>
-          </h3>
-          <p className="mt-1 text-sm text-gray-500">{description}</p>
-        </div>
-        <p className="text-sm font-medium text-gray-900">
-          {formatCurrency(price)}
-        </p>
+      <div className="product-card__actions">
+        <button onClick={() => addToBasket(id)}>Add</button>
       </div>
-    </Link>
+    </>
   );
 };
 
