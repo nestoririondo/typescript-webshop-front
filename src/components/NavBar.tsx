@@ -9,8 +9,9 @@ import Login from "./Login";
 import Logout from "./Logout";
 
 const NavBar = () => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [userMenu, setUserMenu] = useState<boolean>(false);
+  const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] =
+    useState<boolean>(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState<boolean>(false);
 
   const { basket } = useBasket();
   const { user } = useAuth();
@@ -22,11 +23,14 @@ const NavBar = () => {
   return (
     <header>
       <nav className="nav-wrapper">
-        <div className="hamburger" onClick={() => setOpen(!open)}>
+        <div
+          className="hamburger"
+          onClick={() => setIsHamburgerMenuOpen(!isHamburgerMenuOpen)}
+        >
           ☰
         </div>
         <div className="logo">LOGO</div>
-        <div className={open ? "nav-links active" : "nav-links"}>
+        <div className={isHamburgerMenuOpen ? "nav-links active" : "nav-links"}>
           <ul>
             <Link className="nav-link" to="/">
               Home
@@ -43,13 +47,13 @@ const NavBar = () => {
           {user ? <p>Hello, {user.name}</p> : null}
           <IoPersonOutline
             className="user-icon"
-            onClick={() => setUserMenu(!userMenu)}
+            onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
           />
-          {userMenu && !user ? (
-            <Login onLogin={() => setUserMenu(false)} />
+          {isUserMenuOpen && !user ? (
+            <Login onLogin={() => setIsUserMenuOpen(false)} />
           ) : null}
-          {userMenu && user ? (
-            <Logout onLogout={() => setUserMenu(false)} />
+          {isUserMenuOpen && user ? (
+            <Logout onLogout={() => setIsUserMenuOpen(false)} />
           ) : null}
 
           <IoBagHandleOutline className="bag-icon" />
