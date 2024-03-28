@@ -3,7 +3,7 @@ import "../styles/productlist.css";
 import ProductPreview from "./ProductPreview";
 
 type ProductListProps = {
-  products: ProductType[];
+  products: Product[];
 };
 
 const ProductList = ({ products }: ProductListProps) => {
