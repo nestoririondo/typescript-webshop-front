@@ -1,0 +1,67 @@
+.basket-menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  color: white;
+  display: flex;
+}
+.not-menu {
+  flex: 1;
+}
+.menu {
+  background-color: rgba(0, 0, 0, 0.9);
+  min-width: 400px;
+}
+.item-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  .item {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+    padding: 0.5rem;
+    border: 1px solid white;
+    border-radius: 10px;
+
+    .item-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .item-actions {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        gap: 0.5rem;
+        button {
+          background-color: transparent;
+          color: white;
+          border: 1px solid white;
+          padding: 0.5rem;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+.total {
+  padding: 1rem;
+  p {
+    text-align: right;
+  }
+}
+.basket-footer {
+  text-align: center;
+  padding: 1rem;
+  button {
+    width: 100%;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+}
