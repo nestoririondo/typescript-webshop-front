@@ -10,6 +10,10 @@ type BasketSideMenuProps = {
 const BasketSideMenu = ({ onClose }: BasketSideMenuProps) => {
   const { basket, addToBasket, removeFromBasket } = useBasket();
 
+  const total = basket.reduce((acc, item) => {
+    return acc + item.quantity * item.product.price;
+  }, 0);
+
   return (
     <div className="basket-menu">
       <div className="not-menu" onClick={() => onClose()}></div>
@@ -42,6 +46,10 @@ const BasketSideMenu = ({ onClose }: BasketSideMenuProps) => {
               </section>
             </div>
           ))}
+        </div>
+        <div className="total">
+          <p>Total:</p>
+          <p>{formatCurrency(total)}</p>
         </div>
         <div className="basket-footer">
           <button>Checkout</button>
