@@ -1,19 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../context/useAuth";
+import "../styles/login.css";
 
 export type LoginData = {
   email: string;
   password: string;
 };
 
-const Login = () => {
+type LoginProps = {
+  onLogin: () => void;
+};
+
+const Login = ({ onLogin }: LoginProps) => {
   const [userInput, setUserInput] = useState<LoginData>({
     email: "",
     password: "",
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { user , login } = useAuth();
+  const { user, login } = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -25,23 +30,26 @@ const Login = () => {
     setIsLoading(true);
     if (isLoading) return;
     await login(userInput).finally(() => setIsLoading(false));
+    onLogin();
   };
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   return (
     <>
       <div className="login-container">
         <form onSubmit={handleSubmit}>
-          <input
-            onChange={handleChange}
-            type="email"
-            name="email"
-            placeholder="mary@me.com"
-          />
-          <input onChange={handleChange} type="password" name="password" />
+          <label>
+            Email
+            <input
+              onChange={handleChange}
+              type="email"
+              name="email"
+              placeholder="mary@me.com"
+            />
+          </label>
+          <label>
+            Password
+            <input onChange={handleChange} type="password" name="password" />
+          </label>
           <button type="submit">Log in</button>
         </form>
       </div>

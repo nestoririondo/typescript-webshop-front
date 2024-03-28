@@ -1,15 +1,15 @@
 import axios from "axios";
 import { createContext, useState, useContext, ReactNode } from "react";
 import { SERVER } from "../constants/server";
-import { LoginData } from "../pages/Login";
-import { v4 as uuidv4 } from 'uuid';
+import { LoginData } from "../components/Login";
+import { v4 as uuidv4 } from "uuid";
 
 type AuthContextType = {
   user: User | undefined;
   login: (userInput: LoginData) => Promise<void>;
 };
 
-type User = {
+export type User = {
   id: typeof uuidv4;
   name: string;
   email: string;
@@ -33,7 +33,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setUser(user);
   };
 
-  const value = { user, login };
+  const logout = () => {
+    setUser(undefined);
+  };
+
+  const value = { user, login, logout };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

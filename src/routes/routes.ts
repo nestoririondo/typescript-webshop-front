@@ -5,7 +5,7 @@ import User from "../pages/User";
 import Order from "../pages/Order";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
-import Login from "../pages/Login";
+import Login from "../components/Login";
 import Signup from "../pages/Signup";
 
 export type RouteObject = {
@@ -22,6 +22,4 @@ export const routes = [
   { path: "/order", element: Order },
   { path: "/cart", element: Cart },
   { path: "/checkout", element: Checkout },
-  { path: "/login", element: Login },
-  { path: "/signup", element: Signup },
 ];
