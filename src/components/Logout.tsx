@@ -1,15 +1,15 @@
 import { useAuth } from "../context/useAuth";
 
 type LogoutProps = {
-  setUserMenu: (arg: boolean) => void;
+  onLogout: () => void;
 };
 
-const Logout = ({ setUserMenu }: LogoutProps) => {
+const Logout = ({ onLogout }: LogoutProps) => {
   const { logout } = useAuth();
 
   const handleLogout = () => {
     logout();
-    setUserMenu(false);
+    onLogout();
   };
   return (
     <div className="login-container">

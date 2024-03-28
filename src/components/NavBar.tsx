@@ -45,8 +45,12 @@ const NavBar = () => {
             className="user-icon"
             onClick={() => setUserMenu(!userMenu)}
           />
-          {userMenu && !user ? <Login setUserMenu={setUserMenu} /> : null}
-          {userMenu && user ? <Logout setUserMenu={setUserMenu} /> : null}
+          {userMenu && !user ? (
+            <Login onLogin={() => setUserMenu(false)} />
+          ) : null}
+          {userMenu && user ? (
+            <Logout onLogout={() => setUserMenu(false)} />
+          ) : null}
 
           <IoBagHandleOutline className="bag-icon" />
           <span className="cart-count">{totalItems}</span>

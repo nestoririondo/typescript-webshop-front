@@ -8,10 +8,10 @@ export type LoginData = {
 };
 
 type LoginProps = {
-  setUserMenu: (arg: boolean) => void;
+  onLogin: () => void;
 };
 
-const Login = ({ setUserMenu }: LoginProps) => {
+const Login = ({ onLogin }: LoginProps) => {
   const [userInput, setUserInput] = useState<LoginData>({
     email: "",
     password: "",
@@ -30,7 +30,7 @@ const Login = ({ setUserMenu }: LoginProps) => {
     setIsLoading(true);
     if (isLoading) return;
     await login(userInput).finally(() => setIsLoading(false));
-    setUserMenu(false);
+    onLogin();
   };
 
   return (
