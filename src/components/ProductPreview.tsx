@@ -1,10 +1,10 @@
 import { formatCurrency } from "../utils/formatCurrency";
-import { ProductType } from "../types/product";
+import { Product } from "../types/product";
 import { useBasket } from "../context/useBasket";
 import { useNavigate } from "react-router-dom";
 
 type ItemProps = {
-  product: ProductType;
+  product: Product;
 };
 
 const ProductPreview = ({ product }: ItemProps) => {
@@ -25,7 +25,7 @@ const ProductPreview = ({ product }: ItemProps) => {
         <p>{formatCurrency(price)}</p>
       </div>
       <div className="product-card__actions">
-        <button onClick={() => addToBasket(id)}>Add</button>
+        <button onClick={() => addToBasket(product)}>Add</button>
       </div>
     </>
   );

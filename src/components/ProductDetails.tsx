@@ -1,8 +1,8 @@
-import { ProductType } from "../types/product";
+import { Product } from "../types/product";
 import { formatCurrency } from "../utils/formatCurrency";
 
 type ProductTypeProps = {
-  product: ProductType;
+  product: Product;
 };
 
 const ProductDetails = ({ product }: ProductTypeProps) => {
