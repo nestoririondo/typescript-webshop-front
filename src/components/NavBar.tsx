@@ -2,21 +2,23 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { IoPersonOutline } from "react-icons/io5";
-import { useBasket, BasketProduct } from "../context/useBasket";
+import { useBasket, BasketItem } from "../context/useBasket";
 import { useAuth } from "../context/useAuth";
 import "../styles/navbar.css";
 import Login from "./Login";
 import Logout from "./Logout";
+import BasketSideMenu from "./BasketSideMenu";
 
 const NavBar = () => {
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] =
     useState<boolean>(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState<boolean>(false);
+  const [isBasketOpen, setIsBasketOpen] = useState<boolean>(false);
 
   const { basket } = useBasket();
   const { user } = useAuth();
 
-  const totalItems = basket.reduce((acc: number, item: BasketProduct) => {
+  const totalItems = basket.reduce((acc: number, item: BasketItem) => {
     return acc + item.quantity;
   }, 0);
 
@@ -55,10 +57,12 @@ const NavBar = () => {
           {isUserMenuOpen && user ? (
             <Logout onLogout={() => setIsUserMenuOpen(false)} />
           ) : null}
-
-          <IoBagHandleOutline className="bag-icon" />
-          <span className="cart-count">{totalItems}</span>
+          <div className="bag" onClick={() => setIsBasketOpen(!isBasketOpen)}>
+            <IoBagHandleOutline className="bag-icon" />
+            <span className="cart-count">{totalItems}</span>
+          </div>
         </div>
+        {isBasketOpen ? <BasketSideMenu /> : null}
       </nav>
     </header>
   );
