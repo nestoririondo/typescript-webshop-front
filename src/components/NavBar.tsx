@@ -62,7 +62,9 @@ const NavBar = () => {
             <span className="cart-count">{totalItems}</span>
           </div>
         </div>
-        {isBasketOpen ? <BasketSideMenu /> : null}
+        {isBasketOpen ? (
+          <BasketSideMenu onClose={() => setIsBasketOpen(false)} />
+        ) : null}
       </nav>
     </header>
   );
