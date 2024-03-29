@@ -2,6 +2,7 @@ import { BasketItem, useBasket } from "../context/useBasket";
 import "../styles/basket.css";
 import { formatCurrency } from "../utils/formatCurrency";
 import { motion } from "framer-motion";
+import BasketSideMenuItem from "./BasketSideMenuItem";
 
 type BasketSideMenuProps = {
   onClose: () => void;
@@ -10,13 +11,19 @@ type BasketSideMenuProps = {
 const BasketSideMenu = ({ onClose }: BasketSideMenuProps) => {
   const { basket, addToBasket, removeFromBasket } = useBasket();
 
-  const total = basket.reduce((acc, item) => {
+  const total = basket.reduce((acc: number, item: BasketItem) => {
     return acc + item.quantity * item.product.price;
   }, 0);
 
   return (
     <div className="basket-menu">
-      <div className="not-menu" onClick={() => onClose()}></div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        className="not-menu"
+        onClick={() => onClose()}
+      ></motion.div>
       <motion.div
         className="menu"
         initial={{ x: "100%" }}
@@ -25,26 +32,7 @@ const BasketSideMenu = ({ onClose }: BasketSideMenuProps) => {
       >
         <div className="item-container">
           {basket.map((item: BasketItem) => (
-            <div className="item" key={item.product.id.toString()}>
-              <img
-                src="https://via.placeholder.com/150"
-                alt={item.product.name}
-              />
-              <section className="item-details">
-                <h3>{item.product.name}</h3>
-                <p>{formatCurrency(item.product.price)}</p>
-                <div className="item-actions">
-                  <button onClick={() => addToBasket(item.product)}>+</button>
-                  <p>{item.quantity}</p>
-                  <button onClick={() => removeFromBasket(item.product)}>
-                    -
-                  </button>
-                </div>
-              </section>
-              <section className="total-price">
-                <p>{formatCurrency(item.product.price * item.quantity)}</p>
-              </section>
-            </div>
+            <BasketSideMenuItem item={item} key={item.product.id.toString()} />
           ))}
         </div>
         <div className="total">

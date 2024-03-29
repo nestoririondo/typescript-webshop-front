@@ -6,4 +6,5 @@ export type Product = {
   description: string;
   price: number;
   stock: number;
+  images: typeof uuidv4[];
 };
