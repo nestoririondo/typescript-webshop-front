@@ -8,11 +8,18 @@
   display: flex;
 }
 .not-menu {
-  flex: 1;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: relative;
+  width: 100%;
 }
 .menu {
   background-color: rgba(0, 0, 0, 0.9);
-  min-width: 400px;
+  min-width: 375px;
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
 }
 .item-container {
   display: flex;
@@ -26,7 +33,13 @@
     padding: 0.5rem;
     border: 1px solid white;
     border-radius: 10px;
-
+    img {
+      width: 200px;
+      height: auto;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 10px;
+    }
     .item-details {
       display: flex;
       flex-direction: column;
