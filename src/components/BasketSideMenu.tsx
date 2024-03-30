@@ -1,8 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { BasketItem, useBasket } from "../context/useBasket";
-import "../styles/basket.css";
 import { formatCurrency } from "../utils/formatCurrency";
 import { motion } from "framer-motion";
 import BasketSideMenuItem from "./BasketSideMenuItem";
+import "../styles/basket.css";
 
 type BasketSideMenuProps = {
   onClose: () => void;
@@ -14,6 +15,8 @@ const BasketSideMenu = ({ onClose }: BasketSideMenuProps) => {
   const total = basket.reduce((acc: number, item: BasketItem) => {
     return acc + item.quantity * item.product.price;
   }, 0);
+
+  const navigate = useNavigate();
 
   return (
     <div className="basket-menu">
@@ -40,7 +43,7 @@ const BasketSideMenu = ({ onClose }: BasketSideMenuProps) => {
           <p>{formatCurrency(total)}</p>
         </div>
         <div className="basket-footer">
-          <button>Checkout</button>
+          <button onClick={() => navigate("/checkout")}>Checkout</button>
         </div>
       </motion.div>
     </div>
