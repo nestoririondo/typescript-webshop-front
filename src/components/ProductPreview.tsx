@@ -24,7 +24,7 @@ const ProductPreview = ({ product }: ItemProps) => {
           <div className="product-card-info-text">
             <h2>{name}</h2>
             <p>{description}</p>
-            <p>{formatCurrency(price)}</p>
+            <p className="price">{formatCurrency(price)}</p>
           </div>
         </div>
         <div className="product-card__actions">

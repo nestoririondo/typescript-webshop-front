@@ -3,7 +3,7 @@
   top: 0;
   right: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   color: white;
   display: flex;
 }
@@ -13,13 +13,14 @@
   width: 100%;
 }
 .menu {
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(255, 255, 255, 0.9);
   min-width: 375px;
   z-index: 100;
   position: absolute;
   top: 0;
   right: 0;
-  height: 100vh;
+  height: 100%;
+  color: black;
 }
 .item-container {
   display: flex;
@@ -31,7 +32,7 @@
     gap: 1rem;
     justify-content: flex-start;
     padding: 0.5rem;
-    border: 1px solid white;
+    border: 1px solid lightgray;
     border-radius: 10px;
     img {
       width: 200px;
@@ -50,9 +51,6 @@
         align-items: baseline;
         gap: 0.5rem;
         button {
-          background-color: transparent;
-          color: white;
-          border: 1px solid white;
           padding: 0.5rem;
           cursor: pointer;
         }
@@ -71,9 +69,6 @@
   padding: 1rem;
   button {
     width: 100%;
-    background-color: transparent;
-    color: white;
-    border: 1px solid white;
     padding: 0.5rem;
     cursor: pointer;
   }
