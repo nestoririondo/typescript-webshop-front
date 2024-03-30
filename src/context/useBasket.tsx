@@ -54,7 +54,11 @@ export const BasketProvider = ({ children }: BasketProviderProps) => {
     }
   };
 
-  const value = { basket, addToBasket, removeFromBasket };
+  const deleteFromBasket = (product: Product) => {
+    setBasket(basket.filter((item) => item.product.id !== product.id));
+  };
+
+  const value = { basket, addToBasket, removeFromBasket, deleteFromBasket };
 
   return (
     <BasketContext.Provider value={value}>{children}</BasketContext.Provider>
