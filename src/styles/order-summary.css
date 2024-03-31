@@ -1,0 +1,102 @@
+.order-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+.order {
+  background-color: white;
+  border-radius: 10px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  .items {
+    li:first-child {
+      padding-top: 0;
+    }
+    li {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-bottom: 1px solid lightgray;
+      img {
+        width: 80px;
+        height: auto;
+        aspect-ratio: 1/1;
+      }
+      .description-and-price {
+        display: flex;
+        flex-direction: column;
+        margin-right: auto;
+        .price {
+          margin-top: auto;
+        }
+      }
+      .delete-and-quantity {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .trashcan {
+          font-size: 1.25rem;
+          cursor: pointer;
+          margin-left: auto;
+          &:hover {
+            color: rgb(176, 73, 73);
+          }
+        }
+        .item-actions {
+          display: flex;
+          flex-direction: row;
+          gap: 0.5rem;
+          align-items: baseline;
+          button {
+            border: none;
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+          }
+        }
+      }
+    }
+  }
+  .subtotal,
+  .shipping {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .shipping {
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 1rem;
+  }
+  .total {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+  .confirm {
+    button {
+      width: 100%;
+      padding: 1rem;
+      background-color: cadetblue;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1rem;
+      &:hover {
+        background-color: rgb(67, 110, 112);
+      }
+      &:active {
+        transform: scale(0.99);
+        background-color: rgb(34, 58, 58);
+      }
+    }
+  }
+}

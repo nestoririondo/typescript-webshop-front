@@ -1,12 +1,10 @@
 import Home from "../pages/Home";
 import Products from "../pages/Products";
-import Product from "../pages/Product";
+import SingleProduct from "../pages/SingleProduct";
 import User from "../pages/User";
 import Order from "../pages/Order";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
-import Login from "../components/Login";
-import Signup from "../pages/Signup";
 
 export type RouteObject = {
   path: string;
@@ -17,7 +15,7 @@ export type RouteObject = {
 export const routes = [
   { path: "/", element: Home, index: true },
   { path: "/products", element: Products },
-  { path: "/products/:id", element: Product },
+  { path: "/products/:id", element: SingleProduct },
   { path: "/user", element: User },
   { path: "/order", element: Order },
   { path: "/cart", element: Cart },

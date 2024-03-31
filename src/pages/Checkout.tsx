@@ -1,5 +1,13 @@
+import CustomerInformation from "../components/CustomerInformation";
+import OrderSummary from "../components/OrderSummary";
+
 const Checkout = () => {
-  return <div>Checkout</div>;
+  return (
+    <>
+      <CustomerInformation />
+      <OrderSummary />
+    </>
+  );
 };
 
 export default Checkout;

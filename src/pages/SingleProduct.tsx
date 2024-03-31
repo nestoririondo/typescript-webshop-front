@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getProduct } from "../api/products";
-import { ProductType } from "../types/product";
+import { Product } from "../types/product";
 import ProductDetails from "../components/ProductDetails";
 
-const Product = () => {
-  const [product, setProduct] = useState<ProductType>();
+const SingleProduct = () => {
+  const [product, setProduct] = useState<Product>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>();
   const { id } = useParams();
@@ -31,4 +31,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default SingleProduct;

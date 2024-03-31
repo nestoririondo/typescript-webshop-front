@@ -1,48 +1,56 @@
-import { createContext, useState, useContext, ReactNode } from "react";
-import { v4 as uuidv4 } from "uuid";
+import {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+} from "react";
+import { Product } from "../types/product";
 
-export type BasketProduct = {
-  id: typeof uuidv4;
+export type BasketItem = {
+  product: Product;
   quantity: number;
 };
 
 type BasketContextType = {
-  basket: BasketProduct[];
-  addToBasket: (productId: typeof uuidv4) => void;
-  removeFromBasket: (productId: typeof uuidv4) => void;
+  basket: BasketItem[];
+  addToBasket: (product: Product) => void;
+  removeFromBasket: (product: Product) => void;
 };
 
 type BasketProviderProps = {
   children: ReactNode;
 };
+
 const BasketContext = createContext<BasketContextType | undefined>(undefined);
 
-export const BasketProvider = ({ children }: BasketProviderProps) => {    
-  const [basket, setBasket] = useState<BasketProduct[]>([]);
+export const BasketProvider = ({ children }: BasketProviderProps) => {
+  const [basket, setBasket] = useState<BasketItem[]>([]);
 
-  const addToBasket = (productId: BasketProduct["id"]) => {
-    const product = basket.find((product) => product.id === productId);
-    if (product) {
-      product.quantity += 1;
+  const increaseItemQuantity = (product: Product, quantity: number = 1) => {
+    const item = basket.find((item) => item.product.id === product.id);
+    if (item) {
+      item.quantity += 1;
       setBasket([...basket]);
     } else {
-      const newProduct = { id: productId, quantity: 1 };
-      setBasket([...basket, newProduct]);
+      const newItem = { product, quantity: quantity };
+      setBasket([...basket, newItem]);
     }
   };
 
-  const removeFromBasket = (productId: BasketProduct["id"]) => {
-    const product = basket.find((product) => product.id === productId);
-    if (product) {
-      product.quantity -= 1;
+  const decrementItemQuantity = (product: Product) => {
+    const item = basket.find((item) => item.product.id === product.id);
+    if (!item) return;
+    if (item.quantity > 1) {
+      item.quantity -= 1;
       setBasket([...basket]);
-    } else {
-      const newBasket = basket.filter((product) => product.id !== productId);
-      setBasket(newBasket);
     }
   };
 
-  const value = { basket, addToBasket, removeFromBasket };
+  const deleteFromBasket = (product: Product) => {
+    setBasket(basket.filter((item) => item.product.id !== product.id));
+  };
+
+  const value = { basket, increaseItemQuantity, decrementItemQuantity, deleteFromBasket };
 
   return (
     <BasketContext.Provider value={value}>{children}</BasketContext.Provider>
