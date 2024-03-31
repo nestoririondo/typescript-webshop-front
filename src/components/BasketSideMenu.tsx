@@ -18,6 +18,11 @@ const BasketSideMenu = ({ onClose }: BasketSideMenuProps) => {
 
   const navigate = useNavigate();
 
+  const handleGoToCheckout = () => {
+    onClose();
+    navigate("/checkout");
+  };
+  
   return (
     <div className="basket-menu">
       <motion.div
@@ -43,7 +48,7 @@ const BasketSideMenu = ({ onClose }: BasketSideMenuProps) => {
           <p>{formatCurrency(total)}</p>
         </div>
         <div className="basket-footer">
-          <button onClick={() => navigate("/checkout")}>Checkout</button>
+          <button onClick={handleGoToCheckout}>Checkout</button>
         </div>
       </motion.div>
     </div>
