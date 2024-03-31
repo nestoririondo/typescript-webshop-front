@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { getProducts } from "../api/products";
-import { ProductType } from "../types/product";
+import { Product } from "../types/product";
 import ProductList from "../components/ProductList";
 
 const Products = () => {
-  const [products, setProducts] = useState<ProductType[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<Boolean>(true);
   const [error, setError] = useState<string>();
 
