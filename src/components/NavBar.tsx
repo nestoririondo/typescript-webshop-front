@@ -22,6 +22,12 @@ const NavBar = () => {
     return acc + item.quantity;
   }, 0);
 
+  const links = [
+    { name: "Home", path: "/" },
+    { name: "Products", path: "/products" },
+    { name: "About", path: "/about" },
+  ];
+
   return (
     <header>
       <nav className="nav-wrapper">
@@ -34,15 +40,16 @@ const NavBar = () => {
         <div className="logo">LOGO</div>
         <div className={isHamburgerMenuOpen ? "nav-links active" : "nav-links"}>
           <ul>
-            <Link className="nav-link" to="/">
-              Home
-            </Link>
-            <Link className="nav-link" to="/products">
-              Products
-            </Link>
-            <Link className="nav-link" to="/about">
-              About
-            </Link>
+            {links.map((link) => (
+              <Link
+                to={link.path}
+                className="nav-link"
+                key={link.path}
+                onClick={() => setIsHamburgerMenuOpen(false)}
+              >
+                {link.name}
+              </Link>
+            ))}
           </ul>
         </div>
         <div className="user-cart">
@@ -62,6 +69,7 @@ const NavBar = () => {
             <span className="cart-count">{totalItems}</span>
           </div>
         </div>
+
         {isBasketOpen ? (
           <BasketSideMenu onClose={() => setIsBasketOpen(false)} />
         ) : null}
