@@ -6,22 +6,26 @@ type BasketSideMenuItemProps = {
 };
 
 const BasketSideMenuItem = ({ item }: BasketSideMenuItemProps) => {
-  const { addToBasket, removeFromBasket } = useBasket();
+  const { increaseItemQuantity, decrementItemQuantity } = useBasket();
+
+  const {
+    product: { name, price, images },
+  } = item;
 
   return (
     <div className="item" key={item.product.id.toString()}>
-      <img src={item.product.images[0].toString()} alt={item.product.name} />
+      <img src={images[0]} alt={name} />
       <section className="item-details">
-        <h3>{item.product.name}</h3>
-        <p>{formatCurrency(item.product.price)}</p>
+        <h3>{name}</h3>
+        <p>{formatCurrency(price)}</p>
         <div className="item-actions">
-          <button onClick={() => addToBasket(item.product)}>+</button>
+          <button onClick={() => increaseItemQuantity(item.product)}>+</button>
           <p>{item.quantity}</p>
-          <button onClick={() => removeFromBasket(item.product)}>-</button>
+          <button onClick={() => decrementItemQuantity(item.product)}>-</button>
         </div>
       </section>
       <section className="total-price">
-        <p>{formatCurrency(item.product.price * item.quantity)}</p>
+        <p>{formatCurrency(price * item.quantity)}</p>
       </section>
     </div>
   );

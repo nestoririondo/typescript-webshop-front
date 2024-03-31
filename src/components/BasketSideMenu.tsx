@@ -10,7 +10,7 @@ type BasketSideMenuProps = {
 };
 
 const BasketSideMenu = ({ onClose }: BasketSideMenuProps) => {
-  const { basket, addToBasket, removeFromBasket } = useBasket();
+  const { basket } = useBasket();
 
   const total = basket.reduce((acc: number, item: BasketItem) => {
     return acc + item.quantity * item.product.price;

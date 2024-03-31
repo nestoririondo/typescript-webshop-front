@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 export type Product = {
   id: typeof uuidv4;
@@ -6,5 +6,5 @@ export type Product = {
   description: string;
   price: number;
   stock: number;
-  images: typeof uuidv4[];
+  images: string[];
 };

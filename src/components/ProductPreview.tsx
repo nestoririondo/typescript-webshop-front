@@ -8,19 +8,19 @@ type ItemProps = {
 };
 
 const ProductPreview = ({ product }: ItemProps) => {
-  const { addToBasket } = useBasket();
+  const { increaseItemQuantity } = useBasket();
   const { name, description, price, images, id } = product;
 
   const navigate = useNavigate();
 
   return (
     <>
-      <div key={product.id.toString()} className="product-card">
+      <div key={id.toString()} className="product-card">
         <div
           className="product-card-info"
           onClick={() => navigate(`/products/${id}`)}
         >
-          <img src={images[0].toString()} alt={name} />
+          <img src={images[0]} alt={name} />
           <div className="product-card-info-text">
             <h2>{name}</h2>
             <p>{description}</p>
@@ -28,7 +28,7 @@ const ProductPreview = ({ product }: ItemProps) => {
           </div>
         </div>
         <div className="product-card__actions">
-          <button onClick={() => addToBasket(product)}>Add</button>
+          <button onClick={() => increaseItemQuantity(product)}>Add</button>
         </div>
       </div>
     </>

@@ -12,7 +12,10 @@ const Products = () => {
     getProducts()
       .then((res) => setProducts(res.data))
       .catch((err) => setError(err))
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+        console.log(products);
+      });
   }, []);
 
   return (

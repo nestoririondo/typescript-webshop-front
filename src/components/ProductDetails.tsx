@@ -6,7 +6,7 @@ type ProductTypeProps = {
 };
 
 const ProductDetails = ({ product }: ProductTypeProps) => {
-  const { name, description, price, images, id } = product;
+  const { name, description, price, images } = product;
   return (
     <div className="product">
       <h2>{name}</h2>

@@ -3,7 +3,6 @@ import {
   useState,
   useContext,
   ReactNode,
-  useEffect,
 } from "react";
 import { Product } from "../types/product";
 
@@ -27,30 +26,23 @@ const BasketContext = createContext<BasketContextType | undefined>(undefined);
 export const BasketProvider = ({ children }: BasketProviderProps) => {
   const [basket, setBasket] = useState<BasketItem[]>([]);
 
-  useEffect(() => {
-    console.log(basket);
-  }, [basket]);
-
-  const addToBasket = (product: Product) => {
+  const increaseItemQuantity = (product: Product, quantity: number = 1) => {
     const item = basket.find((item) => item.product.id === product.id);
     if (item) {
       item.quantity += 1;
       setBasket([...basket]);
     } else {
-      const newItem = { product, quantity: 1 };
+      const newItem = { product, quantity: quantity };
       setBasket([...basket, newItem]);
     }
   };
 
-  const removeFromBasket = (product: Product) => {
+  const decrementItemQuantity = (product: Product) => {
     const item = basket.find((item) => item.product.id === product.id);
-    if (item) {
-      if (item.quantity > 1) {
-        item.quantity -= 1;
-        setBasket([...basket]);
-      } else {
-        setBasket(basket.filter((item) => item.product.id !== product.id));
-      }
+    if (!item) return;
+    if (item.quantity > 1) {
+      item.quantity -= 1;
+      setBasket([...basket]);
     }
   };
 
@@ -58,7 +50,7 @@ export const BasketProvider = ({ children }: BasketProviderProps) => {
     setBasket(basket.filter((item) => item.product.id !== product.id));
   };
 
-  const value = { basket, addToBasket, removeFromBasket, deleteFromBasket };
+  const value = { basket, increaseItemQuantity, decrementItemQuantity, deleteFromBasket };
 
   return (
     <BasketContext.Provider value={value}>{children}</BasketContext.Provider>

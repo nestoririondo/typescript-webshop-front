@@ -6,8 +6,12 @@ import "../styles/order-summary.css";
 const shipping = 4.95;
 
 const OrderSummary = () => {
-  const { basket, addToBasket, removeFromBasket, deleteFromBasket } =
-    useBasket();
+  const {
+    basket,
+    increaseItemQuantity,
+    decrementItemQuantity,
+    deleteFromBasket,
+  } = useBasket();
 
   const subtotal = basket.reduce(
     (acc, item) => acc + item.product.price * item.quantity,
@@ -38,9 +42,11 @@ const OrderSummary = () => {
                     onClick={() => deleteFromBasket(item.product)}
                   />
                   <div className="item-actions">
-                    <button onClick={() => addToBasket(item.product)}>+</button>
+                    <button onClick={() => increaseItemQuantity(item.product)}>
+                      +
+                    </button>
                     <p>{item.quantity}</p>
-                    <button onClick={() => removeFromBasket(item.product)}>
+                    <button onClick={() => decrementItemQuantity(item.product)}>
                       -
                     </button>
                   </div>
