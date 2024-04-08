@@ -3,8 +3,7 @@
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
   padding: 1rem;
-  margin: 4rem auto;
-  max-width: 1200px;
+  margin: 2rem auto;
   .product-card {
     cursor: pointer;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
@@ -12,7 +11,7 @@
     flex-direction: column;
     justify-content: space-between;
     border-radius: 1rem 1rem 0 0;
-      &:hover {
+    &:hover {
       transform: translateX(-0.25rem) translateY(-0.25rem);
       transition: all 0.3s;
       box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
@@ -44,7 +43,7 @@
           font-size: 1rem;
           font-weight: 300;
         }
-        .price{
+        .price {
           margin-top: auto;
           margin-left: auto;
         }
@@ -64,7 +63,7 @@
           background-color: darkcyan;
         }
         &:active {
-          transform: scale(.98);
+          transform: scale(0.98);
         }
       }
     }

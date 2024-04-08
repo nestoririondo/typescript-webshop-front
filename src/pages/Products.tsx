@@ -20,13 +20,7 @@ const Products = () => {
 
   return (
     <>
-      <div className="product-container">
-        {!isLoading ? (
-          <ProductList products={products} />
-        ) : (
-          <div>Loading...</div>
-        )}
-      </div>
+      {!isLoading ? <ProductList products={products} /> : <div>Loading...</div>}
     </>
   );
 };
