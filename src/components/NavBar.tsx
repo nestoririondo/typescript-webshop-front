@@ -2,12 +2,15 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { IoPersonOutline } from "react-icons/io5";
+import { IoIosSearch } from "react-icons/io";
 import { useBasket, BasketItem } from "../context/useBasket";
 import { useAuth } from "../context/useAuth";
+import logo from "../../public/logo2.png";
 import "../styles/navbar.css";
 import Login from "./Login";
 import Logout from "./Logout";
 import BasketSideMenu from "./BasketSideMenu";
+import {motion } from "framer-motion";
 
 const NavBar = () => {
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] =
@@ -29,7 +32,11 @@ const NavBar = () => {
   ];
 
   return (
-    <header>
+    <motion.header
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
       <nav className="nav-wrapper">
         <div
           className="hamburger"
@@ -37,7 +44,10 @@ const NavBar = () => {
         >
           ☰
         </div>
-        <div className="logo">LOGO</div>
+
+        <Link to="/" className="logo">
+          <img src={logo} alt="logo" />
+        </Link>
         <div className={isHamburgerMenuOpen ? "nav-links active" : "nav-links"}>
           <ul>
             {links.map((link) => (
@@ -54,6 +64,7 @@ const NavBar = () => {
         </div>
         <div className="user-cart">
           {user ? <p>Hello, {user.name}</p> : null}
+          <IoIosSearch className="user-icon" />
           <IoPersonOutline
             className="user-icon"
             onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
@@ -70,11 +81,12 @@ const NavBar = () => {
           </div>
         </div>
 
-        {isBasketOpen ? (
-          <BasketSideMenu onClose={() => setIsBasketOpen(false)} />
-        ) : null}
+        <BasketSideMenu
+          onClose={() => setIsBasketOpen(false)}
+          isBasketOpen={isBasketOpen}
+        />
       </nav>
-    </header>
+    </motion.header>
   );
 };
 
