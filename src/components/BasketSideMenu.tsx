@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { BasketItem, useBasket } from "../context/useBasket";
 import { formatCurrency } from "../utils/formatCurrency";
-import { motion } from "framer-motion";
 import BasketSideMenuItem from "./BasketSideMenuItem";
 import "../styles/basket.css";
 
 type BasketSideMenuProps = {
   onClose: () => void;
+  isBasketOpen: boolean;
 };
 
-const BasketSideMenu = ({ onClose }: BasketSideMenuProps) => {
+const BasketSideMenu = ({ onClose, isBasketOpen }: BasketSideMenuProps) => {
   const { basket } = useBasket();
 
   const total = basket.reduce((acc: number, item: BasketItem) => {
@@ -22,22 +22,14 @@ const BasketSideMenu = ({ onClose }: BasketSideMenuProps) => {
     onClose();
     navigate("/checkout");
   };
-  
+
   return (
-    <div className="basket-menu">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-        className="not-menu"
+    <nav className={isBasketOpen ? "basket-menu visible" : "basket-menu"}>
+      <section
+        className={isBasketOpen ? "not-menu opaque" : "not-menu"}
         onClick={() => onClose()}
-      ></motion.div>
-      <motion.div
-        className="menu"
-        initial={{ x: "100%" }}
-        animate={{ x: 0 }}
-        transition={{ duration: 0.3 }}
-      >
+      ></section>
+      <section className={isBasketOpen ? "menu active" : "menu"}>
         <div className="item-container">
           {basket.map((item: BasketItem) => (
             <BasketSideMenuItem item={item} key={item.product.id.toString()} />
@@ -50,8 +42,8 @@ const BasketSideMenu = ({ onClose }: BasketSideMenuProps) => {
         <div className="basket-footer">
           <button onClick={handleGoToCheckout}>Checkout</button>
         </div>
-      </motion.div>
-    </div>
+      </section>
+    </nav>
   );
 };
 

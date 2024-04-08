@@ -2,25 +2,42 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 100vw;
-  height: 100%;
-  color: white;
-  display: flex;
-}
-.not-menu {
-  background-color: rgba(0, 0, 0, 0.2);
-  position: relative;
   width: 100%;
+  height: 100%;
+  visibility: hidden;
+  transition: visibility 0.3s ease-in-out;
 }
+
+.not-menu {
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 99;
+}
+
 .menu {
   background-color: rgba(255, 255, 255, 0.9);
   min-width: 375px;
   z-index: 100;
-  position: absolute;
+  position: fixed;
   top: 0;
-  right: 0;
+  right: -100%;
   height: 100%;
   color: black;
+  transition: right 0.3s ease-in-out;
+  overflow-y: scroll;
+}
+.visible {
+  visibility: visible;
+}
+.opaque {
+  opacity: 1;
+}
+.active {
+  right: 0;
 }
 .item-container {
   display: flex;
