@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 type AuthContextType = {
   user: User | undefined;
   login: (userInput: LoginData) => Promise<void>;
+  logout: () => void;
 };
 
 export type User = {
@@ -42,4 +43,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-export const useAuth = () => useContext(AuthContext);
+export function useAuth() {
+  const value = useContext(AuthContext);
+
+  if (value === undefined) {
+    throw new Error("useAuth must be wrapped in a <AuthProvider />");
+  }
+
+  return value;
+}

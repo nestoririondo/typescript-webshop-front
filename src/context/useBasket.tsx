@@ -1,9 +1,4 @@
-import {
-  createContext,
-  useState,
-  useContext,
-  ReactNode,
-} from "react";
+import { createContext, useState, useContext, ReactNode } from "react";
 import { Product } from "../types/product";
 
 export type BasketItem = {
@@ -13,13 +8,24 @@ export type BasketItem = {
 
 type BasketContextType = {
   basket: BasketItem[];
-  addToBasket: (product: Product) => void;
-  removeFromBasket: (product: Product) => void;
+  increaseItemQuantity: (product: Product) => void;
+  decrementItemQuantity: (product: Product) => void;
+  deleteFromBasket: (product: Product) => void;
 };
 
 type BasketProviderProps = {
   children: ReactNode;
 };
+
+export function useBasket() {
+  const value = useContext(BasketContext);
+
+  if (value === undefined) {
+    throw new Error("useBasket must be wrapped in a <BasketProvider />");
+  }
+
+  return value;
+}
 
 const BasketContext = createContext<BasketContextType | undefined>(undefined);
 
@@ -50,11 +56,14 @@ export const BasketProvider = ({ children }: BasketProviderProps) => {
     setBasket(basket.filter((item) => item.product.id !== product.id));
   };
 
-  const value = { basket, increaseItemQuantity, decrementItemQuantity, deleteFromBasket };
+  const value = {
+    basket,
+    increaseItemQuantity,
+    decrementItemQuantity,
+    deleteFromBasket,
+  };
 
   return (
     <BasketContext.Provider value={value}>{children}</BasketContext.Provider>
   );
 };
-
-export const useBasket = () => useContext(BasketContext);
