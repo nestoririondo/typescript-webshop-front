@@ -15,7 +15,7 @@ const products = [
 
 const Popular = () => {
   return (
-    <section>
+    <section className="popular">
       <h2>Popular</h2>
       <div className="product-container">
         {products.map((product, index) => (
