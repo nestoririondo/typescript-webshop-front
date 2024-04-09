@@ -22,6 +22,7 @@ const Hero = () => {
     <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
+      transition={{ duration: 2 }}
       className="hero"
     >
       {images.map((image, index) => (

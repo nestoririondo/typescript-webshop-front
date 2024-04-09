@@ -7,6 +7,8 @@
 :root {
   --primary-color: antiquewhite;
   --secondary-color: #eec75c;
+  --secondary-color-dark: #d9b24b;
+  --secondary-color-darker: #c9a03b;
   --text-color: #333;
   --radius: 10px;
 }
