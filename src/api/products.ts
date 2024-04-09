@@ -8,3 +8,7 @@ export const getProducts = async () => {
 export const getProduct = async (id: string) => {
   return await axios.get(`${SERVER}/products/${id}`);
 };
+
+export const addProduct = async (product: any) => {
+  return await axios.post(`${SERVER}/products`, product);
+};
