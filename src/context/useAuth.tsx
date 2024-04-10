@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, useState, useContext, ReactNode } from "react";
 import { SERVER } from "../constants/server";
-import { LoginData } from "../components/Login";
+import { LoginData } from "../components/NavBar/Login";
 import { v4 as uuidv4 } from "uuid";
 
 type AuthContextType = {

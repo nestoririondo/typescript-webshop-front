@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useAuth } from "../context/useAuth";
-import "../styles/login.css";
+import { useAuth } from "../../context/useAuth";
+import "../../styles/login.css";
 
 export type LoginData = {
   email: string;

@@ -3,14 +3,16 @@ import { useState } from "react";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { IoPersonOutline } from "react-icons/io5";
 import { IoIosSearch } from "react-icons/io";
-import { useBasket, BasketItem } from "../context/useBasket";
-import { useAuth } from "../context/useAuth";
-import logo from "../../public/logo2.png";
-import "../styles/navbar.css";
+import { useBasket, BasketItem } from "../../context/useBasket";
+import { useAuth } from "../../context/useAuth";
+import logo from "../../../public/logo2.png";
+import "../../styles/navbar.css";
 import Login from "./Login";
 import Logout from "./Logout";
+import NavBarLinks from "./NavBarLinks";
 import BasketSideMenu from "./BasketSideMenu";
-import {motion } from "framer-motion";
+import HamburgerMenu from "./HamburgerMenu";
+import { motion } from "framer-motion";
 
 const NavBar = () => {
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] =
@@ -27,7 +29,7 @@ const NavBar = () => {
 
   const links = [
     { name: "Home", path: "/" },
-    { name: "Products", path: "/products" },
+    { name: "Shop", path: "/products" },
     { name: "About", path: "/about" },
   ];
 
@@ -40,28 +42,26 @@ const NavBar = () => {
       <nav className="nav-wrapper">
         <div
           className="hamburger"
-          onClick={() => setIsHamburgerMenuOpen(!isHamburgerMenuOpen)}
+          onClick={() => {
+            setIsHamburgerMenuOpen(!isHamburgerMenuOpen);
+            console.log(isHamburgerMenuOpen);
+          }}
         >
           ☰
         </div>
-
         <Link to="/" className="logo">
           <img src={logo} alt="logo" />
         </Link>
-        <div className={isHamburgerMenuOpen ? "nav-links active" : "nav-links"}>
-          <ul>
-            {links.map((link) => (
-              <Link
-                to={link.path}
-                className="nav-link"
-                key={link.path}
-                onClick={() => setIsHamburgerMenuOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </ul>
-        </div>
+        <NavBarLinks
+          links={links}
+          setIsHamburgerMenuOpen={setIsHamburgerMenuOpen}
+        />
+        <HamburgerMenu
+          links={links}
+          onClose={() => setIsHamburgerMenuOpen(false)}
+          isHamburgerMenuOpen={isHamburgerMenuOpen}
+        />
+
         <div className="user-cart">
           {user ? <p>Hello, {user.name}</p> : null}
           <IoIosSearch className="user-icon" />
