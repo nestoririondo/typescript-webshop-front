@@ -6,7 +6,9 @@
 
 :root {
   --primary-color: antiquewhite;
+  --primary-color-light-rgb: 250, 242, 232;
   --secondary-color: #eec75c;
+  --secondary-color-light: #f6da8c;
   --secondary-color-dark: #d9b24b;
   --secondary-color-darker: #c9a03b;
   --text-color: #333;
