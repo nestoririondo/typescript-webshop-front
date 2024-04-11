@@ -1,7 +1,7 @@
-import { BasketItem, useBasket } from "../context/useBasket";
+import { BasketItem, useBasket } from "../../context/useBasket";
 import { FaRegTrashCan } from "react-icons/fa6";
-import { formatCurrency } from "../utils/formatCurrency";
-import "../styles/order-summary.css";
+import { formatCurrency } from "../../utils/formatCurrency";
+import "../../styles/order-summary.css";
 
 const shipping = 4.95;
 
