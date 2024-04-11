@@ -12,7 +12,7 @@ const Logout = ({ onLogout }: LogoutProps) => {
     onLogout();
   };
   return (
-    <div className="login-container">
+    <div className="logout-container">
       <button className="logout-btn" onClick={handleLogout}>
         Logout
       </button>

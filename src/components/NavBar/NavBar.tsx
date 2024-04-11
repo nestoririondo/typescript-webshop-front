@@ -1,24 +1,27 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { IoBagHandleOutline } from "react-icons/io5";
-import { IoPersonOutline } from "react-icons/io5";
+import { IoBagHandleOutline, IoPersonOutline } from "react-icons/io5";
 import { IoIosSearch } from "react-icons/io";
 import { useBasket, BasketItem } from "../../context/useBasket";
 import { useAuth } from "../../context/useAuth";
+import { motion } from "framer-motion";
 import logo from "../../../public/logo2.png";
-import "../../styles/navbar.css";
 import Login from "./Login";
 import Logout from "./Logout";
 import NavBarLinks from "./NavBarLinks";
 import BasketSideMenu from "./BasketSideMenu";
 import HamburgerMenu from "./HamburgerMenu";
-import { motion } from "framer-motion";
+import UserMenu from "./UserMenu";
+import Modal from "../Modal";
+import "../../styles/navbar.css";
 
 const NavBar = () => {
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] =
     useState<boolean>(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState<boolean>(false);
   const [isBasketOpen, setIsBasketOpen] = useState<boolean>(false);
+  const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const { basket } = useBasket();
   const { user } = useAuth();
@@ -32,6 +35,11 @@ const NavBar = () => {
     { name: "Shop", path: "/products" },
     { name: "About", path: "/about" },
   ];
+
+  const handleUserMenuClick = () => {
+    user && setIsUserMenuOpen(!isUserMenuOpen);
+    !user && setIsModalOpen(!isModalOpen);
+  };
 
   return (
     <motion.header
@@ -50,7 +58,8 @@ const NavBar = () => {
           ☰
         </div>
         <Link to="/" className="logo">
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="xBtnc logo" />
+          <p>xBtnc</p>
         </Link>
         <NavBarLinks
           links={links}
@@ -67,14 +76,20 @@ const NavBar = () => {
           <IoIosSearch className="user-icon" />
           <IoPersonOutline
             className="user-icon"
-            onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+            onClick={handleUserMenuClick}
           />
-          {isUserMenuOpen && !user ? (
-            <Login onLogin={() => setIsUserMenuOpen(false)} />
-          ) : null}
-          {isUserMenuOpen && user ? (
-            <Logout onLogout={() => setIsUserMenuOpen(false)} />
-          ) : null}
+          <UserMenu
+            isUserMenuOpen={isUserMenuOpen}
+            setIsUserMenuOpen={setIsUserMenuOpen}
+          />
+
+          <Modal
+            onClose={() => setIsModalOpen(false)}
+            isModalOpen={isModalOpen}
+          >
+            <Login onLogin={() => setIsModalOpen(false)} />
+          </Modal>
+
           <div className="bag" onClick={() => setIsBasketOpen(!isBasketOpen)}>
             <IoBagHandleOutline className="bag-icon" />
             <span className="cart-count">{totalItems}</span>
