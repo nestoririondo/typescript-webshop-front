@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Banner from "./Banner";
 import hero1 from "../../../public/hero1.webp";
 import hero2 from "../../../public/hero2.webp";
 import hero3 from "../../../public/hero3.webp";
@@ -32,6 +33,7 @@ const Hero = () => {
           style={{ backgroundImage: `url(${image})` }}
         ></div>
       ))}
+      <Banner />
     </motion.section>
   );
 };
