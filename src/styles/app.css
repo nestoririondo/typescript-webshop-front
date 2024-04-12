@@ -4,10 +4,23 @@
   box-sizing: border-box;
 }
 
+:root {
+  --primary-color: antiquewhite;
+  --primary-color-light-rgb: 250, 242, 232;
+  --secondary-color: #eec75c;
+  --secondary-color-light: #f6da8c;
+  --secondary-color-light-rgb: 246, 218, 140;
+  --secondary-color-dark: #d9b24b;
+  --secondary-color-darker: #c9a03b;
+  --text-color: #333;
+  --radius: 10px;
+}
+
 body {
-  font-family: 'Roboto', sans-serif;
-  color: #333;
-  background-color: #f4f4f4;
+  font-family: 'Asap', sans-serif;
+  color: var(--text-color);
+  background-color: var(--primary-color);
+  font-family: "Asap", sans-serif;
 }
 
 img {

@@ -12,21 +12,12 @@ const Products = () => {
     getProducts()
       .then((res) => setProducts(res.data))
       .catch((err) => setError(err))
-      .finally(() => {
-        setIsLoading(false);
-        console.log(products);
-      });
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
     <>
-      <div className="product-container">
-        {!isLoading ? (
-          <ProductList products={products} />
-        ) : (
-          <div>Loading...</div>
-        )}
-      </div>
+      {!isLoading ? <ProductList products={products} /> : <div>Loading...</div>}
     </>
   );
 };

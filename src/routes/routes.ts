@@ -1,5 +1,6 @@
 import Home from "../pages/Home";
 import Products from "../pages/Products";
+import AddProduct from "../pages/AddProduct";
 import SingleProduct from "../pages/SingleProduct";
 import User from "../pages/User";
 import Order from "../pages/Order";
@@ -15,6 +16,7 @@ export type RouteObject = {
 export const routes = [
   { path: "/", element: Home, index: true },
   { path: "/products", element: Products },
+  { path: "/products/add", element: AddProduct },
   { path: "/products/:id", element: SingleProduct },
   { path: "/user", element: User },
   { path: "/order", element: Order },

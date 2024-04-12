@@ -1,4 +1,4 @@
-import { useAuth } from "../context/useAuth";
+import { useAuth } from "../../context/useAuth";
 
 type LogoutProps = {
   onLogout: () => void;
@@ -11,8 +11,9 @@ const Logout = ({ onLogout }: LogoutProps) => {
     logout();
     onLogout();
   };
+  
   return (
-    <div className="login-container">
+    <div className="logout-container">
       <button className="logout-btn" onClick={handleLogout}>
         Logout
       </button>
