@@ -1,25 +1,38 @@
-import { useEffect, useRef } from "react";
+import { RefObject, useCallback, useEffect, useRef } from "react";
 import Logout from "./Logout";
 
 type UserMenuProps = {
   isUserMenuOpen: boolean;
   setIsUserMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  userMenuIconDiv: RefObject<HTMLDivElement>;
 };
 
-const UserMenu = ({ isUserMenuOpen, setIsUserMenuOpen }: UserMenuProps) => {
+const UserMenu = ({
+  isUserMenuOpen,
+  setIsUserMenuOpen,
+  userMenuIconDiv,
+}: UserMenuProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setIsUserMenuOpen(false);
+  const handleClickOutside = useCallback(
+    (e: MouseEvent) => {
+      if (
+        userMenuIconDiv.current?.contains(e.target as Node) ||
+        menuRef.current?.contains(e.target as Node)
+      ) {
+        return;
       }
-    };
+      setIsUserMenuOpen(false);
+    },
+    [userMenuIconDiv, menuRef, setIsUserMenuOpen]
+  );
+
+  useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [setIsUserMenuOpen]);
+  }, [handleClickOutside]);
 
   return (
     <nav

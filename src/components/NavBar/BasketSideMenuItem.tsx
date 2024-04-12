@@ -25,20 +25,20 @@ const BasketSideMenuItem = ({ item }: BasketSideMenuItemProps) => {
             className="trashcan"
           />
         </div>
-        <p className="item-price">{formatCurrency(price)}</p>
+        <span className="item-price">{formatCurrency(price)}</span>
 
         <div className="item-actions-total">
           <div className="item-actions">
             <button onClick={() => decrementItemQuantity(item.product)}>
               -
             </button>
-            <p>{item.quantity}</p>
+            <span>{item.quantity}</span>
             <button onClick={() => increaseItemQuantity(item.product)}>
               +
             </button>
           </div>
           <section className="total-price">
-            <p>{formatCurrency(price * item.quantity)}</p>
+            <span>{formatCurrency(price * item.quantity)}</span>
           </section>
         </div>
       </section>

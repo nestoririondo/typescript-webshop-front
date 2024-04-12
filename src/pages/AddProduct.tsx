@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { addProduct } from "../api/products";
 
+const emptyProduct = {
+  name: "",
+  price: 0,
+  description: "",
+  stock: 0,
+  file: null,
+}; 
+
 const AddProduct = () => {
-  const [product, setProduct] = useState({
-    name: "",
-    price: 0,
-    description: "",
-    stock: 0,
-    file: null,
-  });
+  const [product, setProduct] = useState(emptyProduct);
 
   const handleChange = (key: string, value: any) => {
     setProduct({ ...product, [key]: value });

@@ -59,7 +59,7 @@
         font-size: 1rem;
       }
     }
-    button {
+    .shop-now-btn {
       padding: 1rem 2rem;
       font-size: 1.5rem;
       background-color: var(--secondary-color);
@@ -68,6 +68,8 @@
       border-radius: var(--radius);
       cursor: pointer;
       transition: all 0.15s ease-in-out;
+      text-align: center;
+      text-decoration: none;
       &:hover {
         background-color: var(--secondary-color-dark);
       }

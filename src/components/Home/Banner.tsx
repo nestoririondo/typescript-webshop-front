@@ -1,7 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
-  const navigate = useNavigate();
   return (
     <section className="banner">
       <div className="banner-text">
@@ -11,7 +10,7 @@ const Banner = () => {
           been brought from a distant planet and are now available for you to
           purchase.
         </p>
-        <button onClick={() => navigate("/products")}>Shop Now</button>
+        <Link to="/products" className="shop-now-btn">Shop Now</Link>
       </div>
     </section>
   );

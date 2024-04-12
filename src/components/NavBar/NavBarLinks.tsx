@@ -16,7 +16,7 @@ const NavBarLinks = ({ links, setIsHamburgerMenuOpen }: NavBarLinksProps) => {
   }, [location]);
 
   return (
-    <div className="nav-links">
+    <nav className="nav-links">
       <ul>
         {links.map((link) => (
           <Link
@@ -31,7 +31,7 @@ const NavBarLinks = ({ links, setIsHamburgerMenuOpen }: NavBarLinksProps) => {
           </Link>
         ))}
       </ul>
-    </div>
+    </nav>
   );
 };
 

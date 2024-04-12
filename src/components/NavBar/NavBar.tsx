@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { IoBagHandleOutline, IoPersonOutline } from "react-icons/io5";
 import { IoIosSearch } from "react-icons/io";
 import { useBasket, BasketItem } from "../../context/useBasket";
@@ -23,6 +23,8 @@ const NavBar = () => {
   const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
+  const userMenuIcon = useRef<HTMLDivElement>(null);
+
   const { basket } = useBasket();
   const { user } = useAuth();
 
@@ -37,7 +39,7 @@ const NavBar = () => {
   ];
 
   const handleUserMenuClick = () => {
-    user && setIsUserMenuOpen(!isUserMenuOpen);
+    user && setIsUserMenuOpen((prev) => !prev);
     !user && setIsModalOpen(!isModalOpen);
   };
 
@@ -74,13 +76,15 @@ const NavBar = () => {
         <div className="user-cart">
           {user ? <p>Hello, {user.name}</p> : null}
           <IoIosSearch className="user-icon" />
-          <IoPersonOutline
-            className="user-icon"
-            onClick={handleUserMenuClick}
-          />
+
+          <div ref={userMenuIcon} onClick={handleUserMenuClick}>
+            <IoPersonOutline className="user-icon" />
+          </div>
+
           <UserMenu
             isUserMenuOpen={isUserMenuOpen}
             setIsUserMenuOpen={setIsUserMenuOpen}
+            userMenuIconDiv={userMenuIcon}
           />
 
           <Modal

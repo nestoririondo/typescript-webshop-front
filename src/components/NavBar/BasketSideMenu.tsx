@@ -35,7 +35,7 @@ const BasketSideMenu = ({ onClose, isBasketOpen }: BasketSideMenuProps) => {
           <IoIosCloseCircleOutline className="close-icon" />
         </div>
 
-        {basket.length === 0 ? (
+        {basket.length === 0 && (
           <section className="empty">
             <p className="empty-basket">Your basket is empty</p>
             <button
@@ -47,23 +47,25 @@ const BasketSideMenu = ({ onClose, isBasketOpen }: BasketSideMenuProps) => {
               Go to the shop
             </button>
           </section>
-        ) : (
+        )}
+
+        {basket.length !== 0 && (
           <>
-            <div className="item-container">
+            <section className="item-container">
               {basket.map((item: BasketItem) => (
                 <BasketSideMenuItem
                   item={item}
                   key={item.product.id.toString()}
                 />
               ))}
-            </div>
-            <div className="total">
+            </section>
+            <section className="total">
               <p>Total:</p>
               <p>{formatCurrency(total)}</p>
-            </div>
-            <div className="basket-footer">
+            </section>
+            <section className="basket-footer">
               <button onClick={handleGoToCheckout}>Checkout</button>
-            </div>
+            </section>
           </>
         )}
       </section>

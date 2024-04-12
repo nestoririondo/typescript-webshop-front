@@ -1,26 +1,28 @@
+import { CheckoutStep } from '../../pages/Checkout';
+
 type StepsProps = {
-  step: number;
-  setStep: (step: number) => void;
+  step: CheckoutStep;
+  setStep: (step: CheckoutStep) => void;
 };
 
 const Steps = ({ step, setStep }: StepsProps) => {
   return (
     <div className="checkout-steps">
       <div
-        className={`checkout-step ${step === 1 ? "active" : ""}`}
-        onClick={() => setStep(1)}
+        className={`checkout-step ${step === CheckoutStep.OrderSummary ? "active" : ""}`}
+        onClick={() => setStep(CheckoutStep.OrderSummary)}
       >
         Order Summary
       </div>
       <div
-        className={`checkout-step ${step === 2 ? "active" : ""}`}
-        onClick={() => setStep(2)}
+        className={`checkout-step ${step === CheckoutStep.CustomerInformation ? "active" : ""}`}
+        onClick={() => setStep(CheckoutStep.CustomerInformation)}
       >
         Customer Information
       </div>
       <div
-        className={`checkout-step ${step === 3 ? "active" : ""}`}
-        onClick={() => setStep(3)}
+        className={`checkout-step ${step === CheckoutStep.Payment ? "active" : ""}`}
+        onClick={() => setStep(CheckoutStep.Payment)}
       >
         Payment
       </div>

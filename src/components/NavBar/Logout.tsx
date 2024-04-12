@@ -11,6 +11,7 @@ const Logout = ({ onLogout }: LogoutProps) => {
     logout();
     onLogout();
   };
+  
   return (
     <div className="logout-container">
       <button className="logout-btn" onClick={handleLogout}>
