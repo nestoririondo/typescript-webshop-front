@@ -1,6 +1,7 @@
 import axios from "axios";
 import { SERVER } from "../constants/server";
 import { Product } from "../types/product";
+import { AxiosResponse } from "axios";
 
 export const getProducts = async (): Promise<AxiosResponse<Product[]>> => {
   return await axios.get(`${SERVER}/products`);
