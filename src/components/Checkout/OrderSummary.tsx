@@ -2,10 +2,15 @@ import { BasketItem, useBasket } from "../../context/useBasket";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { formatCurrency } from "../../utils/formatCurrency";
 import "../../styles/order-summary.css";
+import { CheckoutStep } from "../../pages/Checkout";
 
 const shipping = 4.95;
 
-const OrderSummary = () => {
+type OrderSummaryProps = {
+  setStep: (step: CheckoutStep) => void;
+};
+
+const OrderSummary = ({setStep}: OrderSummaryProps) => {
   const {
     basket,
     increaseItemQuantity,
@@ -20,40 +25,36 @@ const OrderSummary = () => {
 
   return (
     <div className="order-summary">
-      <h2>Order Summary</h2>
-
       <div className="order">
         <section className="items">
-          {basket.map((item: BasketItem) => {
-            return (
-              <li key={item.product.id.toString()}>
-                <img
-                  src={item.product.images[0].toString()}
-                  alt={item.product.name}
-                />
-                <section className="description-and-price">
-                  <h3>{item.product.name}</h3>
-                  <p className="price">{formatCurrency(item.product.price)}</p>
-                </section>
+          {basket.map((item: BasketItem) => (
+            <li key={item.product.id.toString()}>
+              <img
+                src={item.product.images[0].toString()}
+                alt={item.product.name}
+              />
+              <section className="description-and-price">
+                <h3>{item.product.name}</h3>
+                <p className="price">{formatCurrency(item.product.price)}</p>
+              </section>
 
-                <section className="delete-and-quantity">
-                  <FaRegTrashCan
-                    className="trashcan"
-                    onClick={() => deleteFromBasket(item.product)}
-                  />
-                  <div className="item-actions">
-                    <button onClick={() => increaseItemQuantity(item.product)}>
-                      +
-                    </button>
-                    <p>{item.quantity}</p>
-                    <button onClick={() => decrementItemQuantity(item.product)}>
-                      -
-                    </button>
-                  </div>
-                </section>
-              </li>
-            );
-          })}
+              <section className="delete-and-quantity">
+                <FaRegTrashCan
+                  className="trashcan"
+                  onClick={() => deleteFromBasket(item.product)}
+                />
+                <div className="item-actions">
+                  <button onClick={() => increaseItemQuantity(item.product)}>
+                    +
+                  </button>
+                  <p>{item.quantity}</p>
+                  <button onClick={() => decrementItemQuantity(item.product)}>
+                    -
+                  </button>
+                </div>
+              </section>
+            </li>
+          ))}
         </section>
 
         <section className="subtotal-and-shipping">
@@ -72,8 +73,10 @@ const OrderSummary = () => {
           <h3>{formatCurrency(subtotal + shipping)}</h3>
         </section>
 
-        <section className="confirm">
-          <button>Confirm Order</button>
+        <section className="next">
+          <button onClick={() => setStep(CheckoutStep.CustomerInformation)}>
+            Next
+          </button>
         </section>
       </div>
     </div>
